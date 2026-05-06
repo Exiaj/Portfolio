@@ -222,7 +222,7 @@ html.dark-mode #home {
     margin: 0 auto;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
     #home {
         flex-direction: column;
         min-height: auto;
@@ -609,7 +609,7 @@ h2 {
     margin: 0;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
     #about .about-content {
         flex-direction: column;
         align-items: center;
@@ -633,8 +633,43 @@ h3 {
 
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(250px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    
+    /* 1. Make Skills Section Scroll Sideways */
+    .skills-grid {
+        display: flex;            /* Change from grid to flex */
+        overflow-x: auto;         /* Enable horizontal scroll */
+        scroll-snap-type: x mandatory; /* Smooth snapping effect */
+        gap: 15px;
+        padding-bottom: 15px;     /* Space for the scrollbar */
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    }
+
+    .skills-card {
+        min-width: 85%;           /* Shows 85% of the card so the next one is visible */
+        scroll-snap-align: start; /* Snaps card to the edge */
+        flex-shrink: 0;           /* Prevents cards from squishing */
+    }
+
+    /* 2. Make Projects Grid stack vertically or stay in 2 columns */
+    .projects-grid {
+        display: grid;
+        grid-template-columns: 1fr; /* Stacks cards one per row on mobile */
+        gap: 20px;
+    }
+
+    /* Optional: Hide scrollbar for a cleaner look (Chrome/Safari) */
+    .skills-grid::-webkit-scrollbar {
+        display: none;
+    }
+    .skills-grid {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;     /* Firefox */
+    }
 }
 
 .skills-card {
